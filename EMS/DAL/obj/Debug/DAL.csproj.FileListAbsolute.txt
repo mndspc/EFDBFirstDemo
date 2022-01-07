@@ -1,0 +1,12 @@
+D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\bin\Debug\DAL.dll.config
+D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\bin\Debug\DAL.dll
+D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\bin\Debug\DAL.pdb
+D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\bin\Debug\EntityFramework.dll
+D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\bin\Debug\EntityFramework.xml
+D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\obj\Debug\DAL.csproj.CopyComplete
+D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\obj\Debug\DAL.dll
+D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\obj\Debug\DAL.pdb

@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NordicEMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DeptMaster">
+    <Key>
+      <PropertyRef Name="DeptCode" />
+    </Key>
+    <Property Name="DeptCode" Type="Int32" Nullable="false" />
+    <Property Name="DeptName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="EmpProfiles" Relationship="Self.FK_EmpProfile_DeptMaster" FromRole="DeptMaster" ToRole="EmpProfile" />
+  </EntityType>
+  <EntityType Name="EmpProfile">
+    <Key>
+      <PropertyRef Name="EmpCode" />
+    </Key>
+    <Property Name="EmpCode" Type="Int32" Nullable="false" />
+    <Property Name="EmpName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DeptCode" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DeptMaster" Relationship="Self.FK_EmpProfile_DeptMaster" FromRole="EmpProfile" ToRole="DeptMaster" />
+    <NavigationProperty Name="SalaryInfoes" Relationship="Self.FK_SalaryInfo_EmpProfile" FromRole="EmpProfile" ToRole="SalaryInfo" />
+  </EntityType>
+  <EntityType Name="SalaryInfo">
+    <Key>
+      <PropertyRef Name="SalarySheetNo" />
+    </Key>
+    <Property Name="SalarySheetNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpCode" Type="Int32" Nullable="false" />
+    <Property Name="DateOfSalary" Type="DateTime" Precision="3" />
+    <Property Name="Basic" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Hra" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Da" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="NetSalary" Type="Decimal" Precision="20" Scale="0" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="EmpProfile" Relationship="Self.FK_SalaryInfo_EmpProfile" FromRole="SalaryInfo" ToRole="EmpProfile" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_EmpProfile_DeptMaster">
+    <End Role="DeptMaster" Type="Self.DeptMaster" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="EmpProfile" Type="Self.EmpProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeptMaster">
+        <PropertyRef Name="DeptCode" />
+      </Principal>
+      <Dependent Role="EmpProfile">
+        <PropertyRef Name="DeptCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalaryInfo_EmpProfile">
+    <End Role="EmpProfile" Type="Self.EmpProfile" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalaryInfo" Type="Self.SalaryInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpProfile">
+        <PropertyRef Name="EmpCode" />
+      </Principal>
+      <Dependent Role="SalaryInfo">
+        <PropertyRef Name="EmpCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NordicEMSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DeptMasters" EntityType="Self.DeptMaster" />
+    <EntitySet Name="EmpProfiles" EntityType="Self.EmpProfile" />
+    <EntitySet Name="SalaryInfoes" EntityType="Self.SalaryInfo" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="UserInfoes" EntityType="Self.UserInfo" />
+    <AssociationSet Name="FK_EmpProfile_DeptMaster" Association="Self.FK_EmpProfile_DeptMaster">
+      <End Role="DeptMaster" EntitySet="DeptMasters" />
+      <End Role="EmpProfile" EntitySet="EmpProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalaryInfo_EmpProfile" Association="Self.FK_SalaryInfo_EmpProfile">
+      <End Role="EmpProfile" EntitySet="EmpProfiles" />
+      <End Role="SalaryInfo" EntitySet="SalaryInfoes" />
+    </AssociationSet>
+    <FunctionImport Name="SELECT_ALL_EMP" ReturnType="Collection(NordicEMSModel.SELECT_ALL_EMP_Result)" />
+    <FunctionImport Name="SELECT_EMP_BY_CODE" ReturnType="Collection(NordicEMSModel.SELECT_EMP_BY_CODE_Result)">
+      <Parameter Name="EMPCODE" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(NordicEMSModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(NordicEMSModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_SAVE_EMPLOYEE">
+      <Parameter Name="EMPCODE" Mode="In" Type="Int32" />
+      <Parameter Name="EMPNAME" Mode="In" Type="String" />
+      <Parameter Name="DATEOFBIRTH" Mode="In" Type="DateTime" />
+      <Parameter Name="EMAIL" Mode="In" Type="String" />
+      <Parameter Name="DEPTCODE" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="VALIDATE_USER" ReturnType="Collection(NordicEMSModel.VALIDATE_USER_Result)">
+      <Parameter Name="EMAIL" Mode="In" Type="String" />
+      <Parameter Name="PASSWORD" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="SELECT_ALL_EMP_Result">
+    <Property Type="Int32" Name="EmpCode" Nullable="false" />
+    <Property Type="String" Name="EmpName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="DateOfBirth" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="DeptCode" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="SELECT_EMP_BY_CODE_Result">
+    <Property Type="Int32" Name="EmpCode" Nullable="false" />
+    <Property Type="String" Name="EmpName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="DateOfBirth" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="DeptCode" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="VALIDATE_USER_Result">
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="20" />
+  </ComplexType>
+</Schema>
