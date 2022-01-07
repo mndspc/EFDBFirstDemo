@@ -57,6 +57,7 @@
     <Compile Include="EmpProfile.cs">
       <DependentUpon>EMSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmpProfileDALRepository.cs" />
     <Compile Include="EMSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -72,6 +73,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EMSModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="IEmpProfileDALRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalaryInfo.cs">
       <DependentUpon>EMSModel.tt</DependentUpon>
