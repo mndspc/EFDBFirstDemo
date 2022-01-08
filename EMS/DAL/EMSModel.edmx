@@ -236,8 +236,8 @@
             <End Role="EmpProfile" EntitySet="EmpProfiles" />
             <End Role="SalaryInfo" EntitySet="SalaryInfoes" />
           </AssociationSet>
-          <FunctionImport Name="SELECT_ALL_EMP" ReturnType="Collection(NordicEMSModel.SELECT_ALL_EMP_Result)" />
-          <FunctionImport Name="SELECT_EMP_BY_CODE" ReturnType="Collection(NordicEMSModel.SELECT_EMP_BY_CODE_Result)">
+          <FunctionImport Name="SELECT_ALL_EMP" EntitySet="EmpProfiles" ReturnType="Collection(NordicEMSModel.EmpProfile)" />
+          <FunctionImport Name="SELECT_EMP_BY_CODE" EntitySet="EmpProfiles" ReturnType="Collection(NordicEMSModel.EmpProfile)">
           <Parameter Name="EMPCODE" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
@@ -335,6 +335,11 @@
                 <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
               </MappingFragment>
             </EntityTypeMapping>
+            <EntityTypeMapping TypeName="NordicEMSModel.EmpProfile">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="NordicEMSModel.Store.SP_SAVE_EMPLOYEE" />
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SalaryInfoes">
             <EntityTypeMapping TypeName="NordicEMSModel.SalaryInfo">
@@ -369,26 +374,8 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SELECT_ALL_EMP" FunctionName="NordicEMSModel.Store.SELECT_ALL_EMP">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="NordicEMSModel.SELECT_ALL_EMP_Result">
-                <ScalarProperty Name="EmpCode" ColumnName="EmpCode" />
-                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
-              </ComplexTypeMapping>
-            </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SELECT_EMP_BY_CODE" FunctionName="NordicEMSModel.Store.SELECT_EMP_BY_CODE">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="NordicEMSModel.SELECT_EMP_BY_CODE_Result">
-                <ScalarProperty Name="EmpCode" ColumnName="EmpCode" />
-                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
-              </ComplexTypeMapping>
-            </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="NordicEMSModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="NordicEMSModel.Store.sp_creatediagram" />

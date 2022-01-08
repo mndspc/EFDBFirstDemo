@@ -33,18 +33,32 @@ namespace DAL
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UserInfo> UserInfoes { get; set; }
     
-        public virtual ObjectResult<SELECT_ALL_EMP_Result> SELECT_ALL_EMP()
+        public virtual ObjectResult<EmpProfile> SELECT_ALL_EMP()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SELECT_ALL_EMP_Result>("SELECT_ALL_EMP");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmpProfile>("SELECT_ALL_EMP");
         }
     
-        public virtual ObjectResult<SELECT_EMP_BY_CODE_Result> SELECT_EMP_BY_CODE(Nullable<int> eMPCODE)
+        public virtual ObjectResult<EmpProfile> SELECT_ALL_EMP(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmpProfile>("SELECT_ALL_EMP", mergeOption);
+        }
+    
+        public virtual ObjectResult<EmpProfile> SELECT_EMP_BY_CODE(Nullable<int> eMPCODE)
         {
             var eMPCODEParameter = eMPCODE.HasValue ?
                 new ObjectParameter("EMPCODE", eMPCODE) :
                 new ObjectParameter("EMPCODE", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SELECT_EMP_BY_CODE_Result>("SELECT_EMP_BY_CODE", eMPCODEParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmpProfile>("SELECT_EMP_BY_CODE", eMPCODEParameter);
+        }
+    
+        public virtual ObjectResult<EmpProfile> SELECT_EMP_BY_CODE(Nullable<int> eMPCODE, MergeOption mergeOption)
+        {
+            var eMPCODEParameter = eMPCODE.HasValue ?
+                new ObjectParameter("EMPCODE", eMPCODE) :
+                new ObjectParameter("EMPCODE", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmpProfile>("SELECT_EMP_BY_CODE", mergeOption, eMPCODEParameter);
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)

@@ -17,5 +17,7 @@ namespace DAL
         EmpProfile GetEmployee(int id);
 
         ICollection<EmpProfile> GetAll();
+
+        bool SaveEmployeeUsingSP(EmpProfile empProfile);
     }
 }
