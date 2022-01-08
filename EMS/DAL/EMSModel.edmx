@@ -335,11 +335,6 @@
                 <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
               </MappingFragment>
             </EntityTypeMapping>
-            <EntityTypeMapping TypeName="NordicEMSModel.EmpProfile">
-              <ModificationFunctionMapping>
-                <InsertFunction FunctionName="NordicEMSModel.Store.SP_SAVE_EMPLOYEE" />
-              </ModificationFunctionMapping>
-            </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SalaryInfoes">
             <EntityTypeMapping TypeName="NordicEMSModel.SalaryInfo">
