@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NordicEMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NordicEMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DeptMaster">
           <Key>
             <PropertyRef Name="DeptCode" />
@@ -50,6 +50,22 @@
           </Key>
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NordicEMS.dbo.SELECT_EMP_WITH_DEPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SELECT_EMP_WITH_DEPT">
+          <Key>
+            <PropertyRef Name="EmpCode" />
+            <PropertyRef Name="EmpName" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="DeptCode" />
+            <PropertyRef Name="DeptName" />
+          </Key>
+          <Property Name="EmpCode" Type="int" Nullable="false" />
+          <Property Name="EmpName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DeptCode" Type="int" Nullable="false" />
+          <Property Name="DeptName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_EmpProfile_DeptMaster">
           <End Role="DeptMaster" Type="Self.DeptMaster" Multiplicity="1">
@@ -131,6 +147,15 @@
           <EntitySet Name="SalaryInfo" EntityType="Self.SalaryInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SELECT_EMP_WITH_DEPT" EntityType="Self.SELECT_EMP_WITH_DEPT" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SELECT_EMP_WITH_DEPT].[EmpCode] AS [EmpCode], 
+    [SELECT_EMP_WITH_DEPT].[EmpName] AS [EmpName], 
+    [SELECT_EMP_WITH_DEPT].[Email] AS [Email], 
+    [SELECT_EMP_WITH_DEPT].[DeptCode] AS [DeptCode], 
+    [SELECT_EMP_WITH_DEPT].[DeptName] AS [DeptName]
+    FROM [dbo].[SELECT_EMP_WITH_DEPT] AS [SELECT_EMP_WITH_DEPT]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_EmpProfile_DeptMaster" Association="Self.FK_EmpProfile_DeptMaster">
             <End Role="DeptMaster" EntitySet="DeptMaster" />
             <End Role="EmpProfile" EntitySet="EmpProfile" />
@@ -140,8 +165,7 @@
             <End Role="SalaryInfo" EntitySet="SalaryInfo" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NordicEMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -239,7 +263,7 @@
           </AssociationSet>
           <FunctionImport Name="SELECT_ALL_EMP" ReturnType="Collection(NordicEMSModel.SELECT_ALL_EMP_Result)" />
           <FunctionImport Name="SELECT_EMP_BY_CODE" EntitySet="EmpProfiles" ReturnType="Collection(NordicEMSModel.EmpProfile)">
-            <Parameter Name="EMPCODE" Mode="In" Type="Int32" />
+          <Parameter Name="EMPCODE" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -282,6 +306,7 @@
             <Parameter Name="EMAIL" Mode="In" Type="String" />
             <Parameter Name="PASSWORD" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="SELECT_EMP_WITH_DEPT" EntityType="NordicEMSModel.SELECT_EMP_WITH_DEPT" />
         </EntityContainer>
         <ComplexType Name="SELECT_ALL_EMP_Result">
           <Property Type="Int32" Name="EmpCode" Nullable="false" />
@@ -312,6 +337,20 @@
           <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Password" Nullable="false" MaxLength="20" />
         </ComplexType>
+        <EntityType Name="SELECT_EMP_WITH_DEPT">
+          <Key>
+            <PropertyRef Name="EmpCode" />
+            <PropertyRef Name="EmpName" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="DeptCode" />
+            <PropertyRef Name="DeptName" />
+          </Key>
+          <Property Name="EmpCode" Type="Int32" Nullable="false" />
+          <Property Name="EmpName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DeptCode" Type="Int32" Nullable="false" />
+          <Property Name="DeptName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -426,6 +465,17 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="SELECT_EMP_WITH_DEPT">
+            <EntityTypeMapping TypeName="NordicEMSModel.SELECT_EMP_WITH_DEPT">
+              <MappingFragment StoreEntitySet="SELECT_EMP_WITH_DEPT">
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+                <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="EmpCode" ColumnName="EmpCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

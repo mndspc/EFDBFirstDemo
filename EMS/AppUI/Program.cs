@@ -17,8 +17,14 @@ namespace AppUI
             //var result = empProfileBLL.SaveEmployeeUsingSP(empProfile);
             //Console.WriteLine(result?"Employee Saved":"Error");
 
-           var empProfile= empProfileBLL.SelectEmpByCode(107);
-            Console.WriteLine($"{empProfile.EmpCode}\t{empProfile.EmpName}\t{empProfile.DateOfBirth}\t{empProfile.Email}\t{empProfile.DeptCode}");
+            //var empProfile= empProfileBLL.SelectEmpByCode(107);
+            //Console.WriteLine($"{empProfile.EmpCode}\t{empProfile.EmpName}\t{empProfile.DateOfBirth}\t{empProfile.Email}\t{empProfile.DeptCode}");
+
+           var result= empProfileBLL.SelectEmpWithDept();
+            foreach(var emp in result)
+            {
+                Console.WriteLine($"{emp.EmpCode}\t{emp.EmpName}\t{emp.Email}\t{emp.DeptCode}\t{emp.DeptName}");
+            }
             Console.ReadLine();
         }
     }

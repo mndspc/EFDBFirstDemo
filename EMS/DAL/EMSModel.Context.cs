@@ -32,6 +32,7 @@ namespace DAL
         public virtual DbSet<SalaryInfo> SalaryInfoes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UserInfo> UserInfoes { get; set; }
+        public virtual DbSet<SELECT_EMP_WITH_DEPT> SELECT_EMP_WITH_DEPT { get; set; }
     
         public virtual ObjectResult<SELECT_ALL_EMP_Result> SELECT_ALL_EMP()
         {

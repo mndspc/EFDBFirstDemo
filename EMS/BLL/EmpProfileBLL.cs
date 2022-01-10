@@ -46,5 +46,10 @@ namespace BLL
         {
             return empProfileDAL.GetAll();
         }
+
+        public List<SELECT_EMP_WITH_DEPT> SelectEmpWithDept()
+        {
+            return empProfileDAL.GetEmpWithDept();
+        }
     }
 }

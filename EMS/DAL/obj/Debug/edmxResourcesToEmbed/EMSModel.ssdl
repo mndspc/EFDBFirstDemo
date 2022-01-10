@@ -46,6 +46,22 @@
     <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NordicEMS.dbo.SELECT_EMP_WITH_DEPT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="SELECT_EMP_WITH_DEPT">
+    <Key>
+      <PropertyRef Name="EmpCode" />
+      <PropertyRef Name="EmpName" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="DeptCode" />
+      <PropertyRef Name="DeptName" />
+    </Key>
+    <Property Name="EmpCode" Type="int" Nullable="false" />
+    <Property Name="EmpName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DeptCode" Type="int" Nullable="false" />
+    <Property Name="DeptName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <Association Name="FK_EmpProfile_DeptMaster">
     <End Role="DeptMaster" Type="Self.DeptMaster" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -126,6 +142,15 @@
     <EntitySet Name="SalaryInfo" EntityType="Self.SalaryInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SELECT_EMP_WITH_DEPT" EntityType="Self.SELECT_EMP_WITH_DEPT" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [SELECT_EMP_WITH_DEPT].[EmpCode] AS [EmpCode], 
+    [SELECT_EMP_WITH_DEPT].[EmpName] AS [EmpName], 
+    [SELECT_EMP_WITH_DEPT].[Email] AS [Email], 
+    [SELECT_EMP_WITH_DEPT].[DeptCode] AS [DeptCode], 
+    [SELECT_EMP_WITH_DEPT].[DeptName] AS [DeptName]
+    FROM [dbo].[SELECT_EMP_WITH_DEPT] AS [SELECT_EMP_WITH_DEPT]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_EmpProfile_DeptMaster" Association="Self.FK_EmpProfile_DeptMaster">
       <End Role="DeptMaster" EntitySet="DeptMaster" />
       <End Role="EmpProfile" EntitySet="EmpProfile" />

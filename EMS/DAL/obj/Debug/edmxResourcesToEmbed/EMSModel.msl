@@ -108,5 +108,16 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="SELECT_EMP_WITH_DEPT">
+      <EntityTypeMapping TypeName="NordicEMSModel.SELECT_EMP_WITH_DEPT">
+        <MappingFragment StoreEntitySet="SELECT_EMP_WITH_DEPT">
+          <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+          <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="EmpCode" ColumnName="EmpCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

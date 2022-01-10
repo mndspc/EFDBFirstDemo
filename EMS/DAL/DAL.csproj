@@ -84,6 +84,9 @@
     <Compile Include="SELECT_EMP_BY_CODE_Result.cs">
       <DependentUpon>EMSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SELECT_EMP_WITH_DEPT.cs">
+      <DependentUpon>EMSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>EMSModel.tt</DependentUpon>
     </Compile>

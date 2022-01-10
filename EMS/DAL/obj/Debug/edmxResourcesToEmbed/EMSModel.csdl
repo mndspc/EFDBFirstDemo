@@ -137,6 +137,7 @@
       <Parameter Name="EMAIL" Mode="In" Type="String" />
       <Parameter Name="PASSWORD" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="SELECT_EMP_WITH_DEPT" EntityType="NordicEMSModel.SELECT_EMP_WITH_DEPT" />
   </EntityContainer>
   <ComplexType Name="SELECT_ALL_EMP_Result">
     <Property Type="Int32" Name="EmpCode" Nullable="false" />
@@ -167,4 +168,18 @@
     <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="Password" Nullable="false" MaxLength="20" />
   </ComplexType>
+  <EntityType Name="SELECT_EMP_WITH_DEPT">
+    <Key>
+      <PropertyRef Name="EmpCode" />
+      <PropertyRef Name="EmpName" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="DeptCode" />
+      <PropertyRef Name="DeptName" />
+    </Key>
+    <Property Name="EmpCode" Type="Int32" Nullable="false" />
+    <Property Name="EmpName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DeptCode" Type="Int32" Nullable="false" />
+    <Property Name="DeptName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

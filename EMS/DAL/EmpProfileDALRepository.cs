@@ -160,6 +160,21 @@ namespace DAL
             }
         }
 
+        public List<SELECT_EMP_WITH_DEPT> GetEmpWithDept()
+        {
+            try
+            {
+                using (NordicEMSEntities dbContext = new NordicEMSEntities())
+                {
+                   var result= dbContext.SELECT_EMP_WITH_DEPT.ToList();
+                    //var result = dbContext.SELECT_EMP_WITH_DEPT.Where(x=>x.DeptCode==100);
+                    return result.ToList(); 
+                }
+            }catch(Exception ex)
+            {
+                return null;
+            }
+        }
        
     }
 }
