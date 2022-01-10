@@ -9,4 +9,3 @@ D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\obj\Debug\DAL.csproj.
 D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\obj\Debug\DAL.csproj.CopyComplete
 D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\obj\Debug\DAL.dll
 D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\obj\Debug\DAL.pdb
-D:\Corporate\Nordic Academy\EF\Demos\EFDBFirstDemo\EMS\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
