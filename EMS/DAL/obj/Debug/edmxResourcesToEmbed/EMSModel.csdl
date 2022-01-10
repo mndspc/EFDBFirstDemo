@@ -92,7 +92,7 @@
       <End Role="EmpProfile" EntitySet="EmpProfiles" />
       <End Role="SalaryInfo" EntitySet="SalaryInfoes" />
     </AssociationSet>
-    <FunctionImport Name="SELECT_ALL_EMP" EntitySet="EmpProfiles" ReturnType="Collection(NordicEMSModel.EmpProfile)" />
+    <FunctionImport Name="SELECT_ALL_EMP" ReturnType="Collection(NordicEMSModel.SELECT_ALL_EMP_Result)" />
     <FunctionImport Name="SELECT_EMP_BY_CODE" EntitySet="EmpProfiles" ReturnType="Collection(NordicEMSModel.EmpProfile)">
       <Parameter Name="EMPCODE" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -142,14 +142,14 @@
     <Property Type="Int32" Name="EmpCode" Nullable="false" />
     <Property Type="String" Name="EmpName" Nullable="false" MaxLength="50" />
     <Property Type="DateTime" Name="DateOfBirth" Nullable="false" Precision="23" />
-    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
     <Property Type="Int32" Name="DeptCode" Nullable="false" />
   </ComplexType>
   <ComplexType Name="SELECT_EMP_BY_CODE_Result">
     <Property Type="Int32" Name="EmpCode" Nullable="false" />
     <Property Type="String" Name="EmpName" Nullable="false" MaxLength="50" />
     <Property Type="DateTime" Name="DateOfBirth" Nullable="false" Precision="23" />
-    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
     <Property Type="Int32" Name="DeptCode" Nullable="false" />
   </ComplexType>
   <ComplexType Name="sp_helpdiagramdefinition_Result">

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="NordicEMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="NordicEMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DeptMaster">
           <Key>
             <PropertyRef Name="DeptCode" />
@@ -140,7 +140,8 @@
             <End Role="SalaryInfo" EntitySet="SalaryInfo" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NordicEMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -236,9 +237,9 @@
             <End Role="EmpProfile" EntitySet="EmpProfiles" />
             <End Role="SalaryInfo" EntitySet="SalaryInfoes" />
           </AssociationSet>
-          <FunctionImport Name="SELECT_ALL_EMP" EntitySet="EmpProfiles" ReturnType="Collection(NordicEMSModel.EmpProfile)" />
+          <FunctionImport Name="SELECT_ALL_EMP" ReturnType="Collection(NordicEMSModel.SELECT_ALL_EMP_Result)" />
           <FunctionImport Name="SELECT_EMP_BY_CODE" EntitySet="EmpProfiles" ReturnType="Collection(NordicEMSModel.EmpProfile)">
-          <Parameter Name="EMPCODE" Mode="In" Type="Int32" />
+            <Parameter Name="EMPCODE" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -286,14 +287,14 @@
           <Property Type="Int32" Name="EmpCode" Nullable="false" />
           <Property Type="String" Name="EmpName" Nullable="false" MaxLength="50" />
           <Property Type="DateTime" Name="DateOfBirth" Nullable="false" Precision="23" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
           <Property Type="Int32" Name="DeptCode" Nullable="false" />
         </ComplexType>
         <ComplexType Name="SELECT_EMP_BY_CODE_Result">
           <Property Type="Int32" Name="EmpCode" Nullable="false" />
           <Property Type="String" Name="EmpName" Nullable="false" MaxLength="50" />
           <Property Type="DateTime" Name="DateOfBirth" Nullable="false" Precision="23" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
           <Property Type="Int32" Name="DeptCode" Nullable="false" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -369,6 +370,15 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SELECT_ALL_EMP" FunctionName="NordicEMSModel.Store.SELECT_ALL_EMP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NordicEMSModel.SELECT_ALL_EMP_Result">
+                <ScalarProperty Name="EmpCode" ColumnName="EmpCode" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SELECT_EMP_BY_CODE" FunctionName="NordicEMSModel.Store.SELECT_EMP_BY_CODE">
           </FunctionImportMapping>

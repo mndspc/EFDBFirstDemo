@@ -52,7 +52,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="SELECT_ALL_EMP" FunctionName="NordicEMSModel.Store.SELECT_ALL_EMP" />
+    <FunctionImportMapping FunctionImportName="SELECT_ALL_EMP" FunctionName="NordicEMSModel.Store.SELECT_ALL_EMP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NordicEMSModel.SELECT_ALL_EMP_Result">
+          <ScalarProperty Name="EmpCode" ColumnName="EmpCode" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SELECT_EMP_BY_CODE" FunctionName="NordicEMSModel.Store.SELECT_EMP_BY_CODE" />
     <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="NordicEMSModel.Store.sp_alterdiagram" />
     <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="NordicEMSModel.Store.sp_creatediagram" />

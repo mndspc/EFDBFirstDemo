@@ -33,14 +33,9 @@ namespace DAL
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UserInfo> UserInfoes { get; set; }
     
-        public virtual ObjectResult<EmpProfile> SELECT_ALL_EMP()
+        public virtual ObjectResult<SELECT_ALL_EMP_Result> SELECT_ALL_EMP()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmpProfile>("SELECT_ALL_EMP");
-        }
-    
-        public virtual ObjectResult<EmpProfile> SELECT_ALL_EMP(MergeOption mergeOption)
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmpProfile>("SELECT_ALL_EMP", mergeOption);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SELECT_ALL_EMP_Result>("SELECT_ALL_EMP");
         }
     
         public virtual ObjectResult<EmpProfile> SELECT_EMP_BY_CODE(Nullable<int> eMPCODE)
